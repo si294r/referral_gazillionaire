@@ -12,7 +12,7 @@ if (trim($data['user_id']) == "") {
     );
 }
 
-if (is_numeric($data['count_install'])) {
+if (is_numeric($data['count_install']) && $data['count_install'] > -1) {
     return array(
         'user_id' => $data['user_id'],
         'count_install' => (int)$data['count_install'],

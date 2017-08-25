@@ -3,7 +3,7 @@
 $json = json_decode($input);
 
 $data['device_id'] = isset($json->device_id) ? $json->device_id : "";
-$data['tier'] = isset($json->tier) ? $json->tier : "1";
+$data['world'] = isset($json->world) ? $json->world : "1";
 
 if (trim($data['device_id']) == "") {
     return array(
@@ -41,10 +41,10 @@ $statement1->bindParam(":user_id", $row['user_id']);
 $statement1->bindParam(":user_id1", $row['user_id']);
 $statement1->execute();
 
-$sql = "UPDATE referral SET tier = :tier WHERE user_id = :user_id ";
+$sql = "UPDATE referral SET world = :world WHERE user_id = :user_id ";
 $statement1 = $connection->prepare($sql);
 $statement1->bindParam(":user_id", $row['user_id']);
-$statement1->bindParam(":tier", $data['tier']);
+$statement1->bindParam(":world", $data['world']);
 $statement1->execute();
 
 $sql1 = "SELECT * FROM referral WHERE user_id = :user_id";
@@ -56,7 +56,7 @@ $row = $statement1->fetch(PDO::FETCH_ASSOC);
 return array(
     'shorten_id' => intval($row['shorten_id']),
     'user_id' => $row['user_id'],
-    'tier' => $row['tier'],
+    'world' => $row['world'],
     'device_id' => $data['device_id'],
     'shorten_url_1' => "http://$SHORT_DOMAIN/".base_convert((int)"{$array['shorten_id']}1" + 100000, 10, 32),
     'shorten_url_2' => "http://$SHORT_DOMAIN/".base_convert((int)"{$array['shorten_id']}2" + 100000, 10, 32),

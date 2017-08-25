@@ -51,11 +51,9 @@ if ($affected_row > 0) {
     $statement1->execute(array(':user_id' => $data['referrer']));
     $row = $statement1->fetch(PDO::FETCH_ASSOC);
 
-    $tier = is_numeric($row["tier"]) ? intval($row["tier"]) : 1;
+    $world = is_numeric($row["world"]) ? intval($row["world"]) : 1;
 
-    // get reward based on tier and url_type
-    // $reward = get_reward($tier, $data['url_type'])
-    $reward = "1000,CASH";
+    $reward = "0.065,CASH,$world";
 
     if (strpos($reward, "CASH") !== FALSE) {
         $title = STR_ALERT_INBOX_TITLE4;

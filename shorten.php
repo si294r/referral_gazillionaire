@@ -56,7 +56,7 @@ $row = $statement1->fetch(PDO::FETCH_ASSOC);
 return array(
     'shorten_id' => intval($row['shorten_id']),
     'user_id' => $row['user_id'],
-    'world' => intval($row['world']),
+    'world' => $row['world'],
     'device_id' => $data['device_id'],
     'shorten_url_1' => "http://$SHORT_DOMAIN/".base_convert((int)"{$array['shorten_id']}1" + 100000, 10, 32),
     'shorten_url_2' => "http://$SHORT_DOMAIN/".base_convert((int)"{$array['shorten_id']}2" + 100000, 10, 32),

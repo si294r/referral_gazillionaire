@@ -58,10 +58,10 @@ return array(
     'user_id' => $row['user_id'],
     'world' => $row['world'],
     'device_id' => $data['device_id'],
-    'shorten_url_1' => "http://$SHORT_DOMAIN/".base_convert((int)"{$array['shorten_id']}1" + 100000, 10, 32),
-    'shorten_url_2' => "http://$SHORT_DOMAIN/".base_convert((int)"{$array['shorten_id']}2" + 100000, 10, 32),
-    'shorten_url_3' => "http://$SHORT_DOMAIN/".base_convert((int)"{$array['shorten_id']}3" + 100000, 10, 32),
-    'shorten_url_4' => "http://$SHORT_DOMAIN/".base_convert((int)"{$array['shorten_id']}4" + 100000, 10, 32),
+    'shorten_url_1' => "http://$SHORT_DOMAIN/".base_convert((int)"{$row['shorten_id']}1" + 100000, 10, 32),
+    'shorten_url_2' => "http://$SHORT_DOMAIN/".base_convert((int)"{$row['shorten_id']}2" + 100000, 10, 32),
+    'shorten_url_3' => "http://$SHORT_DOMAIN/".base_convert((int)"{$row['shorten_id']}3" + 100000, 10, 32),
+    'shorten_url_4' => "http://$SHORT_DOMAIN/".base_convert((int)"{$row['shorten_id']}4" + 100000, 10, 32),
     'error' => 0,
     'message' => 'Success'
 );

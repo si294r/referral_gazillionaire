@@ -53,7 +53,8 @@ if ($affected_row > 0) {
 
     $world = is_numeric($row["world"]) ? intval($row["world"]) : 1;
 
-    $reward = "0.065,CASH,$world";
+//    $reward = "0.065,CASH,$world";
+    $reward = "50,CRYSTAL";
 
     if (strpos($reward, "CASH") !== FALSE) {
         $title = STR_ALERT_INBOX_TITLE4;

@@ -36,7 +36,8 @@ $statement1->execute();
 
 $sql2 = "UPDATE referral "
         . "SET referrer = :referrer "
-        . "WHERE user_id = :user_id and coalesce(referrer, 0) <> :referrer1 ";
+        . "WHERE user_id = :user_id "
+        . "and (referrer is null or referrer <> :referrer1) ";
 $statement2 = $connection->prepare($sql2);
 $statement2->bindParam(":referrer", $data['referrer']);
 $statement2->bindParam(":user_id", $data['user_id']);

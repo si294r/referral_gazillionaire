@@ -52,7 +52,7 @@ if ($affected_row > 0 && isset($referral_reward[ $data['url_type'] ])) {
     $statement1->execute(array(':user_id' => $data['referrer']));
     $row = $statement1->fetch(PDO::FETCH_ASSOC);
 
-    $world = is_numeric($row["world"]) ? intval($row["world"]) : 1;
+    $world = isset($row["world"]) ? $row["world"] : "1";
 
     if ($data['url_type'] == "1" || $data['url_type'] == "3") {
         $title = STR_ALERT_INBOX_TITLE4;

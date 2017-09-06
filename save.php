@@ -26,7 +26,7 @@ $connection = new PDO(
 );
     
 $sql = "INSERT INTO referral (user_id) "
-        . "SELECT :user_id WHERE NOT EXISTS ("
+        . "SELECT * FROM (SELECT :user_id) t WHERE NOT EXISTS ("
         . " SELECT 1 FROM referral WHERE user_id = :user_id1"
         . ")";
 $statement1 = $connection->prepare($sql);
@@ -44,7 +44,7 @@ $statement2->bindParam(":referrer1", $data['referrer']);
 $statement2->execute();
 $affected_row = $statement2->rowCount();
 
-if ($affected_row > 0) {
+if ($affected_row > 0 && isset($referral_reward[ $data['url_type'] ])) {
     // TODO - integrate to inbox
     $sql = "SELECT * FROM referral WHERE user_id = :user_id ";
     $statement1 = $connection->prepare($sql);
@@ -53,15 +53,14 @@ if ($affected_row > 0) {
 
     $world = is_numeric($row["world"]) ? intval($row["world"]) : 1;
 
-//    $reward = "0.065,CASH,$world";
-    $reward = "50,CRYSTAL";
-
     if (strpos($reward, "CASH") !== FALSE) {
         $title = STR_ALERT_INBOX_TITLE4;
         $caption = STR_ALERT_INBOX_CAPTION4;
+        $reward = $referral_reward[ $data['url_type'] ] . "," . $world;
     } else {
         $title = STR_ALERT_INBOX_TITLE1;
         $caption = STR_ALERT_INBOX_CAPTION1;
+        $reward = $referral_reward[ $data['url_type'] ];
     }
     
     $device_id = $data['referrer'];

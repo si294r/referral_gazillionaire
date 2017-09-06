@@ -16,3 +16,12 @@ define('STR_ALERT_INBOX_TITLE3', "SUBSCRIPTION HAD ENDED!");
 define('STR_ALERT_INBOX_CAPTION3', "Go subscribe another one!");
 define('STR_ALERT_INBOX_TITLE4', "FREE CASH!");
 define('STR_ALERT_INBOX_CAPTION4', "Let's build the other business!");
+
+// REFERRAL REWARD
+
+$referral_reward = array(
+    "1" => "0.06,CASH", // reward = 60% from cash user
+    "2" => "50,CRYSTAL", // reward = 50 crystal
+    "3" => "0.06,CASH", // reward = 60% from cash user
+    "4" => "50,CRYSTAL", // reward = 50 crystal
+);

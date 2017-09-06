@@ -54,7 +54,7 @@ if ($affected_row > 0 && isset($referral_reward[ $data['url_type'] ])) {
 
     $world = is_numeric($row["world"]) ? intval($row["world"]) : 1;
 
-    if (strpos($reward, "CASH") !== FALSE) {
+    if ($data['url_type'] == "1" || $data['url_type'] == "3") {
         $title = STR_ALERT_INBOX_TITLE4;
         $caption = STR_ALERT_INBOX_CAPTION4;
         $reward = $referral_reward[ $data['url_type'] ] . "," . $world;

@@ -25,15 +25,6 @@ $connection = new PDO(
     $myuser, $mypass
 );
     
-$sql = "INSERT INTO referral (user_id) "
-        . "SELECT * FROM (SELECT :user_id) t WHERE NOT EXISTS ("
-        . " SELECT 1 FROM referral WHERE user_id = :user_id1"
-        . ")";
-$statement1 = $connection->prepare($sql);
-$statement1->bindParam(":user_id", $data['user_id']);
-$statement1->bindParam(":user_id1", $data['user_id']);
-$statement1->execute();
-
 $sql2 = "UPDATE referral "
         . "SET referrer = :referrer "
         . "WHERE user_id = :user_id "

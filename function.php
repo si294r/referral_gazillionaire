@@ -28,3 +28,47 @@ function get_user_id($device_id)
     
     return $user_id;
 }
+
+function get_referral($user_id, $world) 
+{
+    global $connection;
+    
+    $key = "gazil_referral_" . $user_id;
+    $row = apcu_fetch($key);
+    $is_update_cache = false;
+    
+    if ($row === FALSE) {
+        $sql = "INSERT INTO referral (user_id) "
+                . "SELECT * FROM (SELECT :user_id) t WHERE NOT EXISTS ("
+                . " SELECT 1 FROM referral WHERE user_id = :user_id1"
+                . ")";
+        $statement1 = $connection->prepare($sql);
+        $statement1->bindParam(":user_id", $user_id);
+        $statement1->bindParam(":user_id1", $user_id);
+        $statement1->execute();
+
+        $sql1 = "SELECT * FROM referral WHERE user_id = :user_id";
+        $statement1 = $connection->prepare($sql1);
+        $statement1->execute(array(':user_id' => $user_id));
+        $row = $statement1->fetch(PDO::FETCH_ASSOC);                        
+        
+        $is_update_cache = true;
+    }
+
+    if ($row['world'] != $world) {
+        $sql = "UPDATE referral SET world = :world WHERE user_id = :user_id ";
+        $statement1 = $connection->prepare($sql);
+        $statement1->bindParam(":user_id", $user_id);
+        $statement1->bindParam(":world", $world);
+        $statement1->execute();
+        
+        $row['world'] = $world;
+        $is_update_cache = true;
+    }
+    
+    if ($is_update_cache) {
+        apcu_store($key, $row, 900);        
+    }
+    
+    return $row;
+}

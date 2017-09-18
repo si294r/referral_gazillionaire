@@ -22,26 +22,7 @@ $connection = new PDO(
 
 $user_id = get_user_id($data['device_id']);
 
-$sql = "INSERT INTO referral (user_id) "
-        . "SELECT * FROM (SELECT :user_id) t WHERE NOT EXISTS ("
-        . " SELECT 1 FROM referral WHERE user_id = :user_id1"
-        . ")";
-$statement1 = $connection->prepare($sql);
-$statement1->bindParam(":user_id", $user_id);
-$statement1->bindParam(":user_id1", $user_id);
-$statement1->execute();
-
-$sql = "UPDATE referral SET world = :world WHERE user_id = :user_id ";
-$statement1 = $connection->prepare($sql);
-$statement1->bindParam(":user_id", $user_id);
-$statement1->bindParam(":world", $data['world']);
-$statement1->execute();
-
-$sql1 = "SELECT * FROM referral WHERE user_id = :user_id";
-$statement1 = $connection->prepare($sql1);
-$statement1->execute(array(':user_id' => $user_id));
-$row = $statement1->fetch(PDO::FETCH_ASSOC);
-
+$row = get_referral($user_id, $data['world']);
     
 return array(
     'shorten_id' => intval($row['shorten_id']),

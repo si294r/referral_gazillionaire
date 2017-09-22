@@ -46,12 +46,12 @@ if ($affected_row > 0 && isset($referral_reward[ $data['url_type'] ])) {
     $world = isset($row["world"]) ? $row["world"] : "1";
 
     if ($data['url_type'] == "1" || $data['url_type'] == "3") {
-        $title = STR_ALERT_INBOX_TITLE4;
-        $caption = STR_ALERT_INBOX_CAPTION4;
+        $title = STR_VERIFIED_INSTALL_CASH1;
+        $caption = STR_VERIFIED_INSTALL_CASH2;
         $reward = $referral_reward[ $data['url_type'] ] . "," . $world;
     } else {
-        $title = STR_ALERT_INBOX_TITLE1;
-        $caption = STR_ALERT_INBOX_CAPTION1;
+        $title = STR_VERIFIED_INSTALL_CRYSTALS1;
+        $caption = STR_VERIFIED_INSTALL_CRYSTALS2;
         $reward = $referral_reward[ $data['url_type'] ];
     }
     

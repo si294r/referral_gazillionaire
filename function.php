@@ -2,9 +2,9 @@
 
 function get_user_id($device_id) 
 {
-    global $connection;
+    global $connection, $IS_DEVELOPMENT;
     
-    $key = "gazil_user_" . $device_id;
+    $key = $IS_DEVELOPMENT ? "gazildev_user_" . $device_id : "gazil_user_" . $device_id;
     $user_id = apcu_fetch($key);
 
     if ($user_id === FALSE) {        
@@ -31,9 +31,9 @@ function get_user_id($device_id)
 
 function get_referral($user_id, $world) 
 {
-    global $connection;
+    global $connection, $IS_DEVELOPMENT;
     
-    $key = "gazil_referral_" . $user_id;
+    $key = $IS_DEVELOPMENT ? "gazildev_user_" . $device_id : "gazil_user_" . $device_id;
     $row = apcu_fetch($key);
     $is_update_cache = false;
     

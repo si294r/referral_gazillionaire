@@ -33,7 +33,7 @@ function get_referral($user_id, $world)
 {
     global $connection, $IS_DEVELOPMENT;
     
-    $key = $IS_DEVELOPMENT ? "gazdev_ref_" . $device_id : "gaz_ref_" . $device_id;
+    $key = $IS_DEVELOPMENT ? "gazdev_ref_" . $user_id : "gaz_ref_" . $user_id;
     $row = apcu_fetch($key);
     $is_update_cache = false;
     

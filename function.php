@@ -53,6 +53,8 @@ function get_referral($user_id, $world)
         $row = $statement1->fetch(PDO::FETCH_ASSOC);                        
         
         $is_update_cache = true;
+    } else {
+        $row = json_decode($row, true);
     }
 
     if ($row['world'] != $world) {
@@ -67,7 +69,7 @@ function get_referral($user_id, $world)
     }
     
     if ($is_update_cache) {
-        apcu_store($key, $row, 900);        
+        apcu_store($key, json_encode($row), 900);        
     }
     
     return $row;

@@ -4,7 +4,7 @@ include("/var/www/mysql-config2.php");
 
 $mydatabase = $IS_DEVELOPMENT ? "gazillionairedev" : "gazillionaire";
 
-$SHORT_DOMAIN = "www.alegrium.com/bil2";
+$SHORT_DOMAIN = $IS_DEVELOPMENT ? "www.alegrium.com/bil2dev" : "www.alegrium.com/bil2";
 
 // IN-GAME COPIES
 
